@@ -1,0 +1,17 @@
+﻿@using OnlineLibrary.Models
+@{
+    ViewBag.Title = "DeleteAuthor";
+}
+
+<h2>DeleteAuthor</h2>
+
+
+<div>
+    <form method="post" action="" class="form-control-static">
+        <p>Are you sure you want to delete this author?</p>
+        <input type="hidden" value="@ViewBag.Author.Name" name="Name" />
+        <input type="hidden" value="@ViewBag.Author.Id" name="Id" />
+        <input class="btn-block" type="submit" value="Yes" />
+    </form>
+    <h4 class="h4">@Html.ActionLink("<- Back to author list.", "Index", "Authors") </h4>
+</div>

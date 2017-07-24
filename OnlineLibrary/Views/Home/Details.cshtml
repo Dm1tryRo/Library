@@ -1,0 +1,64 @@
+﻿@using OnlineLibrary.Models;
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+<table class="table">
+    <tr>
+        <td><h4>Book name</h4></td>
+        <td><h4>Authors</h4></td>
+        <td><h4>Quantity</h4></td>
+    </tr>
+
+    <tr>
+        <td><p>@ViewBag.Book.Name</p></td>
+        <td>
+            @foreach (Author a in ViewBag.Book.Authors)
+            { @a.Name <br />}
+        </td>
+        <td><p>@ViewBag.Book.Quantity</p></td>
+    </tr>
+</table>
+@if (User.Identity.IsAuthenticated)
+{
+<table width="90%" border="1" align="center">
+    <tr>
+        <td align="center"><h4> @Html.ActionLink("Edit", "EditBook", "Home", new { id = ViewBag.Book.Id }, new Object()) </h4></td>
+        <td align="center"><h4> @Html.ActionLink("Delete", "DeleteBook", "Home", new { id = ViewBag.Book.Id }, new Object())</h4></td> 
+    </tr>
+</table>
+}
+else { <p>You need login to edit/delete book.</p> <br />}
+<h3>History of takes</h3> <br />
+<hr />
+<h4>Green - returned</h4><br />
+<h4>Red - not returned</h4> 
+<hr />
+<br />
+<table class="table">
+    <tr>
+        <td><h4>User who take</h4></td>
+        <td><h4>User Email</h4></td>
+        <td><h4>Date</h4></td>
+    </tr>
+    @foreach (Take t in ViewBag.Takes)
+    {
+        if (@t.isReturned)
+        {
+        <tr style="background-color: green">
+            <td><p>@t.User.Name</p></td>
+            <td><p>@t.User.Email</p></td>
+            <td><p>@t.Date</p></td>
+        </tr>
+        }
+        else
+        {
+            <tr style="background-color: red">
+                <td><p>@t.User.Name</p></td>
+                <td><p>@t.User.Email</p></td>
+                <td><p>@t.Date.ToShortDateString()</p></td>
+            </tr>
+        }
+    }
+</table>

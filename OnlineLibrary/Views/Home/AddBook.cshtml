@@ -1,0 +1,40 @@
+﻿@using OnlineLibrary.Models;
+@{
+    ViewBag.Title = "AddBook";
+}
+
+<h2 style="margin-left:15%;">AddBook</h2>
+
+<div class="body-content">
+    <form method="post" action="">
+    <table class="table-responsive">
+        <tr>
+            <td><p>Enter name: </p></td>
+            <td><input required type="text" name="Name" value="Name of Book"/> </td>
+        </tr>
+        <tr>
+            <td><p>Enter quantity :</p></td>
+            <td>
+                <input required type="text" name="Quantity" value="0"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>Choise authors: </p>
+            </td>
+            <td>
+                <select id="Authors" name="Authors" multiple="multiple">
+                    @foreach (Author author in ViewBag.Authors)
+                    {
+                        <option>@author.Name</option>
+                    }
+                </select>
+
+            </td>            
+        </tr>
+
+        <tr class="col-md-offset-2 col-md-10"><td><input class="btn btn-success" type="submit" value="Add Book" /> </td><td></td></tr>
+    </table>
+    </form>
+</div>
+        

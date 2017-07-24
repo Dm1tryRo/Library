@@ -1,0 +1,35 @@
+﻿@using OnlineLibrary.Models
+@{
+    ViewBag.Title = "Authors";
+}
+
+
+<div>
+    <h3>Range of authors.</h3>
+    <table class="table">
+        <tr>
+            <td><h4>Author name</h4></td>
+            <td><h4>Author books</h4></td>
+            <td><h4>Details</h4></td>
+        </tr>
+        @foreach (var b in ViewBag.Authors)
+        {
+            <tr>
+                <td><p>@b.Name</p></td>
+                <td>
+                    @foreach (Book a in b.Books)
+                    { @a.Name <br />}
+                </td>
+                <td>@Html.ActionLink("View detalis", "Details", new { id = b.Id })</td>
+            </tr>
+        }
+    </table>
+    @if (User.Identity.IsAuthenticated)
+    {
+    <h3><a href="/Authors/AddAuthor">Add new author.</a></h3>
+    }
+    else
+    {
+        <h3>You must log in to add new book.</h3>
+    }
+</div>

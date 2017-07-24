@@ -1,0 +1,32 @@
+﻿@using OnlineLibrary.Models
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<table class="table">
+    <tr>
+        <td><h4>Author name</h4></td>
+        <td><h4>Author books</h4></td>
+    </tr>
+
+    <tr>
+        <td><p>@ViewBag.Author.Name</p></td>
+        <td>
+            @foreach (Book a in ViewBag.Author.Books)
+            { @a.Name <br />}
+        </td>
+    </tr>
+</table>
+@if (User.Identity.IsAuthenticated)
+{
+<table width="90%" border="1" align="center">
+    <tr>
+        <td align="center"><h4> @Html.ActionLink("Edit", "EditAuthor", "Authors", new { id = ViewBag.Author.Id }, new Object()) </h4></td>
+        <td align="center"><h4> @Html.ActionLink("Delete", "DeleteAuthor", "Authors", new { id = ViewBag.Author.Id }, new Object())</h4></td>
+    </tr>
+</table>
+}
+else
+{ <p>You need login to edit/delete author.</p> <br />}

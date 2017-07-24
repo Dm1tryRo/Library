@@ -1,0 +1,43 @@
+﻿@using OnlineLibrary.Models
+@{
+    ViewBag.Title = "EditAuthor";
+}
+
+<h2>EditAuthor</h2>
+
+
+<div class="body-content">
+    <form method="post" action="">
+        <!--<input type="hidden" value="@ViewBag.Count" name="Id" /> -->
+        <table class="table-responsive">
+            <tr>
+                <td><p>Old name: (You can enter new) </p></td>
+                <td><input required type="text" name="Name" value="@ViewBag.Author.Name" /> </td>
+            </tr>
+            <tr>
+                <td>Old books: </td>
+                <td>
+                    @foreach (Book a in ViewBag.Author.Books)
+                    {
+                        @a.Name
+                        <br />
+                    }
+                </td>
+                <td>
+                    <p>Choise new books: </p>
+                </td>
+                <td>
+                    <select required id="Books" name="Books" multiple="multiple">
+                        @foreach (Book book in ViewBag.Books)
+                        {
+                            <option>@book.Name</option>
+                        }
+                    </select>
+
+                </td>
+            </tr>
+
+            <tr><td><input class="btn-success" type="submit" value="Edit" /> </td><td></td></tr>
+        </table>
+    </form>
+</div>

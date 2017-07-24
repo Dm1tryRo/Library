@@ -1,0 +1,60 @@
+﻿@using OnlineLibrary.Models;
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div>
+    <h2>Range of books.</h2>
+    <table width="90%" border="1" align="center">
+        <tr>
+            <td align="center"><h4>All Books</h4></td>
+            <td align="center"><h4>@Html.ActionLink("Book Available", "AvailableBook", "Home")</h4></td>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <td align="center"><h4>@Html.ActionLink("Book taken by me", "BookTakenByUser", "Home") (@ViewBag.BooksCount)</h4></td>
+            }
+        </tr>
+    </table>
+    @if (!User.Identity.IsAuthenticated)
+    { <h5>You need to login to take books.</h5> }
+    <table class="table">
+        <tr>
+            <td><h4>Book name</h4></td>
+            <td><h4>Authors</h4></td>
+            <td><h4>Quantity</h4></td>
+            <td><h4>Details</h4></td>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <td><h4>Take</h4></td>
+            }
+        </tr>
+        @foreach (var b in ViewBag.Books)
+        {
+            <tr>
+                <td><p>@b.Name</p></td>
+                <td>
+                    @foreach (Author a in b.Authors)
+                    { @a.Name <br />}
+                </td>
+                <td><p>@b.Quantity</p></td>
+                <td>@Html.ActionLink("View detalis", "Details", new { id = b.Id })</td>
+                @if (User.Identity.IsAuthenticated && b.Quantity>0)
+                {
+                    <td>@Html.ActionLink("Take", "TakeBook", new { id = b.Id, UserName = User.Identity.Name })</td>
+                }
+                else if(b.Quantity == 0)
+                {
+                    <td>Book out of stock</td>
+                }
+
+            </tr>
+        }
+    </table>
+    @if (User.Identity.IsAuthenticated) {
+    <h3><a href="/Home/AddBook">Add new book.</a></h3>
+    }
+    else
+    {
+    < h3 > You must log in to add new author.</ h3 >
+    }
+</div>
